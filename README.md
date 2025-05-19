@@ -24,14 +24,14 @@ password: pass123
 
 # Rodar o sistema:
 Na pasta root do sistema efetue o comando no powershell ou bash, 
-`$ docker-compose up`
+`$ docker-compose up -d`
 
 Ao startar as imagens docker pode mos acessar o sistema nos endereços:
-Front:
+## Front:
 - Página: http://localhost:8000
 - Rotas: /, /login, /signup
 
-Back:
+## Back:
 - API: http://localhost:8080/api/*
 - H2 Console: http://localhost:8080/h2-console 
 - Swagger: http://localhost:8080/swagger-ui/index.html
