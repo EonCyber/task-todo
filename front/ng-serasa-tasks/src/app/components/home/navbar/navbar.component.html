@@ -1,0 +1,30 @@
+<p-menubar [model]="items">
+    <ng-template #start>
+        <div class="flex items-center h-full container space-x-5 ">
+            <img src="/serasa_logo.png" alt="Serasa Tasks" class="w-15 object-contain" />
+            <h3 class="text-pink-700">To Do List</h3>
+        </div>
+    </ng-template>
+    <ng-template #end>
+        <div class="flex items-center h-full px-8 space-x-10">
+            <div #calendar class="flex items-center space-x-5">
+                <div>
+                    <span><h6>Choose List's Date</h6></span>
+                </div>
+                <p-datepicker
+                    [showIcon]="true"
+                    size="large"
+                    [showOnFocus]="false"
+                    inputStyleClass="hidden"
+                    styleClass="h-10"
+                    panelStyleClass="custom-datepicker-panel"
+                    (onSelect)="onDatePicked($event)">
+                </p-datepicker>
+            </div>
+            <div>
+                <p-menu #menu [model]="avatarMenuItems" [popup]="true" />
+                <p-avatar (click)="menu.toggle($event)" size="large" class="cursor-pointer shadow-sm" [image]="avatarUrl()" shape="circle" />
+            </div>
+        </div>
+    </ng-template>
+</p-menubar>

@@ -1,0 +1,40 @@
+<div class="flex h-screen">
+    <!-- Left: Image with pink gradient -->
+    <div class="hidden md:flex w-1/2 relative">
+      <img
+        src="/serasa_logo.png"
+        alt="Login background"
+        class=""
+      />
+      <div class="absolute inset-0 bg-gradient-to-tl from-pink-400/70 to-pink-800/80"></div>
+    </div>
+  
+    <!-- Right: Login form -->
+    <div class="w-full md:w-1/2 flex items-center justify-center bg-white">
+      <div class="w-full max-w-md p-8 space-y-6">
+        <h3 class="font-bold text-pink-600 text-center py-4">Provide Your Credentials</h3>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+          <div>
+            <label for="email" class="block font-medium mb-1"><b>Email</b></label>
+            <input pInputText id="email" type="email" formControlName="email" class="w-full" />
+          </div>
+          <div class="w-full">
+            <label for="password" class="block font-medium mb-1"><b>Password</b></label>
+            <p-password id="password" type="password" formControlName="password" styleClass="w-full" inputStyleClass="w-full" [toggleMask]="true" [feedback]="false"/>
+          </div>
+          <div class="text-sm text-gray-600 mt-2">
+            Don't have an account?
+            <a routerLink="/signup" class="text-pink-500 hover:underline font-semibold cursor-pointer">Sign up</a>
+          </div>
+          <p-button
+            type="submit"
+            label="Sign In"
+            icon="pi pi-sign-in"
+            class="w-full"
+            [disabled]="!form.valid"
+          ></p-button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <p-toast></p-toast>

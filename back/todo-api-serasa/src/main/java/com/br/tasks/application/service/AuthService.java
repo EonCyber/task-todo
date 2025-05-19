@@ -36,6 +36,7 @@ public class AuthService implements LoginUseCase, LogoutUseCase {
                                     .id(foundProfile.get().getId())
                                     .email(foundProfile.get().getEmail())
                                     .fullName(foundProfile.get().getFullName())
+                                    .avatarUrl(foundProfile.get().getAvatarUrl())
                                     .createdAt(foundProfile.get().getCreatedAt())
                                     .build()
                     )

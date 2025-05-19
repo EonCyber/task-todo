@@ -1,0 +1,10 @@
+::ng-deep .p-datepicker-dropdown {
+    /* background-color: transparent !important; */
+    border: none !important;
+    border-radius: 0.5rem !important;
+    box-shadow: none !important;
+}
+::ng-deep .custom-datepicker-panel {
+    margin-left: -19rem !important; 
+  }
+

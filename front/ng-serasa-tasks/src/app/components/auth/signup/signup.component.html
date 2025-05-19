@@ -1,0 +1,75 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-100 px-4">
+    <div class="bg-white rounded-xl shadow-lg p-10 w-full max-w-md">
+      <h2 class="text-pink-600 mb-6 text-center">Create your account</h2>
+  
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-4">
+        <div>
+          <label class="block font-bold mb-1">Full Name</label>
+          <input pInputText formControlName="fullName" placeholder="John Doe" class="w-full" />
+          <p-message
+            *ngIf="signupForm.get('fullName')?.errors?.['required'] && (signupForm.get('fullName')?.dirty || signupForm.get('fullName')?.touched)"
+            severity="error"
+            variant="simple"
+            text="Name field is required."
+        ></p-message>
+        </div>
+  
+        <div>
+          <label class="block font-bold mb-1">Email</label>
+          <input pInputText formControlName="email" placeholder="you@example.com" class="w-full" />
+          @if (signupForm.get('email')?.errors?.['required'] && (signupForm.get('email')?.dirty || signupForm.get('email')?.touched)) {
+            <p-message
+                severity="error"
+                variant="simple"
+                text="Email is required."
+            ></p-message>
+          }
+          @if(signupForm.get('email')?.errors?.['email'] && (signupForm.get('email')?.dirty || signupForm.get('email')?.touched)){
+            <p-message
+                severity="error"
+                variant="simple"
+                text="Invalid email format."
+            ></p-message>
+          }
+          
+        </div>
+  
+        <div>
+          <label class="block font-bold mb-1">Password</label>
+          <p-password type="password" formControlName="password" placeholder="••••••••" styleClass="w-full" inputStyleClass="w-full" />
+          @if(signupForm.get('password')?.errors?.['required'] && (signupForm.get('password')?.dirty || signupForm.get('password')?.touched)) {
+            <p-message
+                severity="error"
+                variant="simple"
+                text="Password is required."
+            ></p-message>
+          }
+          
+        </div>
+  
+        <div>
+          <label class="block font-bold mb-1">Confirm Password</label>
+          <input pInputText type="password" formControlName="confirmPassword" placeholder="••••••••" class="w-full" />
+            @if(signupForm.hasError('matchPasswords') && (signupForm.get('confirmPassword')?.touched || signupForm.get('confirmPassword')?.dirty)) {
+                <p-message
+                    severity="error"
+                    variant="simple"
+                    text="Must match the password chosen."
+                ></p-message> 
+            }
+        </div>
+        <div>
+          <label class="block font-bold mb-1">Avatar Url</label>
+          <input pInputText formControlName="avatarUrl" placeholder="http://url.com" class="w-full" />
+        </div>
+  
+        <button pButton type="submit" label="Sign Up" class="w-full mt-4"></button>
+  
+        <p class="text-sm text-center mt-4">
+          Already have an account?
+          <a routerLink="/login" class="text-pink-600 font-semibold text-md">Sign in</a>
+        </p>
+      </form>
+    </div>
+  </div>
+  

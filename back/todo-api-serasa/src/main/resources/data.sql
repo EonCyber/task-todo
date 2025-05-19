@@ -25,7 +25,7 @@ CREATE TABLE tasks (
 
 -- Insert Profile
 INSERT INTO profiles (full_name, email, password, avatar_url, role_enum, created_at, updated_at)
-VALUES ('John Doe', 'john@example.com', '$2a$10$bxo88GBMALq8EQ2Tf374HOecBKWO0cG8sq1cR6NQyFBAm.IPzTmpC', 'https://i.pravatar.cc/150?img=3', 'USER', NOW(), NULL);
+VALUES ('John Doe', 'john@example.com', '$2a$10$bxo88GBMALq8EQ2Tf374HOecBKWO0cG8sq1cR6NQyFBAm.IPzTmpC', 'https://primefaces.org/cdn/primeng/images/demo/avatar/amyelsner.png', 'USER', NOW(), NULL);
 
 -- Insert Tasks for that Profile
 INSERT INTO tasks (title, task_type, task_status, created_at, to_complete_at, completed_at, profile_id)

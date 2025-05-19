@@ -1,0 +1,91 @@
+<section class="boxed"> 
+    <!-- Welcome -->
+    <div class="card flex py-10 px-10">
+        <!--  Se nao tiver usuario logado, deve mostar tag p-skeleton -->
+        <h1>
+            <span class="low-highlight">Welcome, {{ getProfileName() }}</span>
+        </h1>
+    </div>
+    <!-- Task count header -->
+    <div class="px-10 pb-4 flex items-center justify-between">
+        <h3 class="text-black text-lg font-medium">
+            You have  <span class="text-pink-500 text-6xl font-bold">{{ tasks().length }}</span> tasks {{ displayText() }}
+            <span class="text-green-600 text-base font-semibold flex items-center gap-1 ">
+                <i class="pi pi-check"></i> {{ tasksCompleted }} completed
+            </span>
+        </h3>
+        <div class="space-x-3">
+        <!-- Button for Filter -->
+        <p-button
+            type="button"
+            severity="secondary" 
+            [raised]="true"
+            icon="pi pi-sliders-v"
+            [rounded]="true"
+            label="Filter"
+        ></p-button>
+        <!-- Button for Adding Task -->
+        <p-button
+            type="button"
+            [raised]="true"
+            icon="pi pi-plus"
+            [rounded]="true"
+            label="Add Task"
+            (click)="openAddTaskForm()"
+        ></p-button>
+        </div>
+     
+    </div>
+    <!-- List of Tasks -->
+     <div class="card px-10">
+        @for(task of tasks(); track task.id) {
+            <div class="py-2">
+                <task-card [task]="task" (delete)="deleteTaskById($event)"
+                (update)="updateTaskById($event)"/>
+            </div>
+        }
+        @if (tasks().length > 0) {
+            <p-paginator (onPageChange)="onPageChange($event)" [first]="first" [rows]="size" [totalRecords]="totalRecords"/>
+        }
+     </div>
+    
+</section>
+<!-- ADD TASK DIALOG -->
+<p-dialog header="Add Task" [modal]="true" [(visible)]="addFormVisible" [style]="{ width: '51rem', height: '25rem' }">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-3">
+        <div class="card flex flex-col gap-2">
+            <label for="on_label"><b>Description</b></label>
+            <input pInputText  autocomplete="off" formControlName="title" pSize="large" class="w-186" placeholder="e.g Take out the trash from the kitchen..."/>
+        </div>
+        <div class="card flex flex-wrap justify-start items-end gap-4 py-5">
+            <div class="card flex flex-col gap-2">
+                <label for="on_label"><b>Task Type</b></label>
+                <p-select formControlName="type" [options]="taskTypes" optionLabel="desc" placeholder="Select" class="w-full md:w-56" />
+            </div>
+            <p-divider  layout="vertical" />
+            <div class="card flex flex-col gap-2">
+                <label for="on_label"><b>Status</b></label>
+                <p-select formControlName="status" [options]="taskStatus" optionLabel="desc" placeholder="Select" class="w-48" />
+            </div>
+            <p-divider layout="vertical" />
+            <div class="card flex flex-col gap-2">
+                <label for="on_label"><b>Due at</b></label>
+                <p-datepicker inputId="calendar-12h" formControlName="toCompleteAt" [timeOnly]="true" hourFormat="12" placeholder="Time to complete" />
+            </div>
+        </div>
+        <p-footer class="flex justify-end pt-4 space-x-2">
+            <p-button 
+                size="large"
+                severity="secondary" 
+                label="Cancel" 
+                (click)="openAddTaskForm()"
+            ></p-button>
+            <p-button 
+                size="large"
+                type="submit" 
+                label="Confirm" 
+                [disabled]="form.invalid"
+            ></p-button>
+        </p-footer>
+    </form>
+</p-dialog>
