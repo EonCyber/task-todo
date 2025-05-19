@@ -186,5 +186,6 @@ export class TasklistComponent implements OnInit {
     this.keyword.set('');
     this.selectedStatuses.set([]);
     this.selectedTypes.set([]);
+    this.showFilterDialog.set(false);
   }
 }

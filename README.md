@@ -14,6 +14,7 @@ Usuário deve se logar ou cadastrar(/login, /signgup) e será movido para tela p
     
 # Pendencias:
 - Botão de Ediçao (dentro do detalhe da tarefa): ainda nao implementado 19/05/2025
+- Settings: Botão de settings no menu de contexto ainda nao tem funcionalidade. 19/05/2025
 - Bug: Possivel bug na sincronia das datas pela diferenca de fuso horario entre servidor e front, observado as 21:00 (pois em iso 21:00 brt troca a data para o proximo dia)
 
 # Dados do Sistema:
