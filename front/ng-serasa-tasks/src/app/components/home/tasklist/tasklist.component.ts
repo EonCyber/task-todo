@@ -43,6 +43,16 @@ export class TasklistComponent implements OnInit {
   // data
   taskTypes: { desc: string, code: string }[] = [];
   taskStatus: { desc: string, code: string }[] = [];
+  statusLabels: Record<string, string> = {
+    PENDING: 'Pending',
+    PROGRESS: 'In Progress',
+    COMPLETED: 'Completed'
+  };
+  typeLabels: Record<string, string> = {
+    C: 'Home/Chores',
+    W: 'Work/Professional',
+    E: 'Exercises/Health'
+  };
   fb = inject(FormBuilder);
 
   first: number = 0;

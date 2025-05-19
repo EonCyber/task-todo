@@ -93,36 +93,44 @@
 <!-- Filter Dialog -->
 <p-dialog header="Filter Tasks" [modal]="true" [(visible)]="showFilterDialog"  [style]="{ width: '30vw' }">
     <div class="p-fluid">
-        <div class="flex flex-col gap-2"> 
-            <label for="keyword">Keyword</label>
-            <input id="keyword" type="text" pInputText [(ngModel)]="tempKeyword" />      
+        <div class="flex flex-col gap-2 py-4"> 
+            <label for="keyword"><h6>Search</h6></label>
+            <p-iconfield>
+                <p-inputicon class="pi pi-search" />
+                <input id="keyword" type="text" pInputText [(ngModel)]="tempKeyword" class="w-full"/>  
+            </p-iconfield>     
         </div>
-      <label><h6>Status</h6></label>
-      @for(status of ['PENDING', 'PROGRESS', 'COMPLETED']; track status) {
-        <div class="flex items-center gap-1">
-            <p-checkbox 
-            [inputId]="status"
-            [value]="status" 
-            name="status" 
-            [(ngModel)]="tempStatus"
-            >
-          </p-checkbox><label [for]="status" class="ml-2">{{ status }}</label> 
-        </div>
-      }
-  
-    <label><h6>Type</h6></label>
-    @for(type of ['C', 'W', 'E']; track type) {
-        <div>
-            <p-checkbox 
-            [value]="type" 
-            [inputId]="type"
-            name="type" 
-            [(ngModel)]="tempType"
-            binary="false">
-          </p-checkbox><label [for]="type" class="ml-2">{{ type }}</label> 
-        </div>
-        
-      } 
+        <div class="py-2">
+            <label><h6>Status</h6></label>
+            @for(status of ['PENDING', 'PROGRESS', 'COMPLETED']; track status) {
+                <div class="gap-1">
+                    <p-checkbox 
+                    [inputId]="status"
+                    [value]="status" 
+                    name="status" 
+                    [(ngModel)]="tempStatus"
+                    >
+                </p-checkbox><label [for]="status" class="ml-2">{{ statusLabels[status] }}</label> 
+                </div>
+            }
+         </div>
+         <div class="py-2">
+            <label><h6>Type</h6></label>
+            @for(type of ['C', 'W', 'E']; track type) {
+                <div>
+                    <p-checkbox 
+                    [value]="type" 
+                    [inputId]="type"
+                    name="type" 
+                    [(ngModel)]="tempType"
+                    binary="false">
+                  </p-checkbox>
+                  <label [for]="type" class="ml-2">{{ typeLabels[type] }}</label> 
+                </div>
+                
+              } 
+         </div>
+   
     </div>
   
     <ng-template pTemplate="footer">
