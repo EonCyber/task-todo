@@ -11,6 +11,6 @@ services:
   frontend:
     build: ./front/ng-serasa-tasks
     ports:
-      - "80:80"
+      - "8000:80"
     depends_on:
       - backend
