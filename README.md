@@ -28,7 +28,8 @@ Na pasta root do sistema efetue o comando no powershell ou bash,
 
 Ao startar as imagens docker pode mos acessar o sistema nos endereços:
 Front:
-- Página: http://localhost ou http://localhost:80
+- Página: http://localhost:8000
+- Rotas: /, /login, /signup
 
 Back:
 - API: http://localhost:8080/api/*
