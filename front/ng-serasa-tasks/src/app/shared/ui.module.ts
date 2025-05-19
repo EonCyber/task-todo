@@ -32,6 +32,7 @@ import { MessageModule } from 'primeng/message';
 import { ToastModule } from 'primeng/toast';
 import { RippleModule } from 'primeng/ripple';
 import { PaginatorModule } from 'primeng/paginator';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
     exports: [
@@ -56,7 +57,8 @@ import { PaginatorModule } from 'primeng/paginator';
         MessageModule,
         ToastModule,
         RippleModule,
-        PaginatorModule
+        PaginatorModule,
+        CheckboxModule
 
     ]
 })

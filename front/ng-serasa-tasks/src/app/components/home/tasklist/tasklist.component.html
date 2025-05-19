@@ -22,6 +22,7 @@
             [raised]="true"
             icon="pi pi-sliders-v"
             [rounded]="true"
+            (click)="openFilter()"
             label="Filter"
         ></p-button>
         <!-- Button for Adding Task -->
@@ -38,7 +39,7 @@
     </div>
     <!-- List of Tasks -->
      <div class="card px-10">
-        @for(task of tasks(); track task.id) {
+        @for(task of filteredTasks(); track task.id) {
             <div class="py-2">
                 <task-card [task]="task" (delete)="deleteTaskById($event)"
                 (update)="updateTaskById($event)"/>
@@ -89,3 +90,43 @@
         </p-footer>
     </form>
 </p-dialog>
+<!-- Filter Dialog -->
+<p-dialog header="Filter Tasks" [modal]="true" [(visible)]="showFilterDialog"  [style]="{ width: '30vw' }">
+    <div class="p-fluid">
+        <div class="flex flex-col gap-2"> 
+            <label for="keyword">Keyword</label>
+            <input id="keyword" type="text" pInputText [(ngModel)]="tempKeyword" />      
+        </div>
+      <label><h6>Status</h6></label>
+      @for(status of ['PENDING', 'PROGRESS', 'COMPLETED']; track status) {
+        <div class="flex items-center gap-1">
+            <p-checkbox 
+            [inputId]="status"
+            [value]="status" 
+            name="status" 
+            [(ngModel)]="tempStatus"
+            >
+          </p-checkbox><label [for]="status" class="ml-2">{{ status }}</label> 
+        </div>
+      }
+  
+    <label><h6>Type</h6></label>
+    @for(type of ['C', 'W', 'E']; track type) {
+        <div>
+            <p-checkbox 
+            [value]="type" 
+            [inputId]="type"
+            name="type" 
+            [(ngModel)]="tempType"
+            binary="false">
+          </p-checkbox><label [for]="type" class="ml-2">{{ type }}</label> 
+        </div>
+        
+      } 
+    </div>
+  
+    <ng-template pTemplate="footer">
+      <p-button label="Reset" icon="pi pi-times" (click)="resetFilter()" severity="warn"></p-button>
+      <p-button label="Apply" icon="pi pi-check" (click)="applyFilter()" severity="success"></p-button>
+    </ng-template>
+  </p-dialog>

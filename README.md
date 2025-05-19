@@ -13,7 +13,6 @@ Usuário deve se logar ou cadastrar(/login, /signgup) e será movido para tela p
 - O usuário ao clicar em uma tarefa pode efetuar algumas açoes como: alterar o status da tarefa (pending, in progress e completed) ou deletar a tarefa.
     
 # Pendencias:
-- Botao de filtro: ainda nao implementado 19/05/2025
 - Botão de Ediçao (dentro do detalhe da tarefa): ainda nao implementado 19/05/2025
 - Bug: Possivel bug na sincronia das datas pela diferenca de fuso horario entre servidor e front, observado as 21:00 (pois em iso 21:00 brt troca a data para o proximo dia)
 

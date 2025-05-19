@@ -1,10 +1,10 @@
-import { Component, effect, inject, OnInit, signal } from '@angular/core';
+import { Component, computed, effect, inject, OnInit, signal } from '@angular/core';
 import { UiModule } from '../../../shared/ui.module';
 import { CommonModule } from '@angular/common';
 import { TaskService } from '../../../services/task.service';
 import { AddTask, Task } from '../../../models/task';
 import { TaskCardComponent } from './task-card/task-card.component';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators  } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators  } from '@angular/forms';
 import { CalendarService } from '../../../services/calendar.service';
 import { formatDateToMonthDay, isItToday, meargeDateToTime } from '../../../shared/util/date/date-utils';
 import { AuthService } from '../../../services/auth.service';
@@ -13,7 +13,7 @@ import { PaginatorState } from 'primeng/paginator';
 
 @Component({
   selector: 'tasklist-component',
-  imports: [CommonModule, UiModule,ReactiveFormsModule, TaskCardComponent],
+  imports: [CommonModule, UiModule,FormsModule,ReactiveFormsModule, TaskCardComponent],
   templateUrl: './tasklist.component.html',
   styleUrl: './tasklist.component.css',
   providers: [TaskService, ToasterService],
@@ -24,6 +24,23 @@ export class TasklistComponent implements OnInit {
 
   displayText = signal<string>('');
   tasks = signal<Task[]>([]);
+  // filter logic variables
+  showFilterDialog = signal(false);
+   keyword = signal('');
+   tempKeyword: string = '';
+   tempStatus = [];
+   tempType = [];
+   selectedStatuses = signal<string[]>([]);
+   selectedTypes = signal<string[]>([]);
+   filteredTasks = computed(() => {
+    return this.tasks().filter(task => {
+      const matchesKeyword = task.title.toLowerCase().includes(this.keyword().toLowerCase());
+      const matchesStatus = this.selectedStatuses().length === 0 || this.selectedStatuses().includes(task.status);
+      const matchesType = this.selectedTypes().length === 0 || this.selectedTypes().includes(task.type);
+      return matchesKeyword && matchesStatus && matchesType;
+    });
+  });
+  // data
   taskTypes: { desc: string, code: string }[] = [];
   taskStatus: { desc: string, code: string }[] = [];
   fb = inject(FormBuilder);
@@ -134,5 +151,30 @@ export class TasklistComponent implements OnInit {
     this.first = e.first ?? 0;
     this.size = e.rows ?? 10;
     this.fetchTaskListByDate(this.calendarService.dateSelected!);
+  }
+
+  openFilter() {
+    this.showFilterDialog.set(true);
+  }
+
+  applyFilter() {
+    this.keyword.set(this.tempKeyword);
+    this.updateStatusAndTypes();
+    this.showFilterDialog.set(false);
+  }
+  updateStatusAndTypes() {
+   
+    this.selectedStatuses.set(this.tempStatus);
+    this.selectedTypes.set(this.tempType);
+     
+  }
+
+  resetFilter() {
+    this.tempKeyword = ''
+    this.tempStatus = [];
+    this.tempType = [];
+    this.keyword.set('');
+    this.selectedStatuses.set([]);
+    this.selectedTypes.set([]);
   }
 }
