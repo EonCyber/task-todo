@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./back/todo-api-serasa
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+
+  frontend:
+    build: ./front/ng-serasa-tasks
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
